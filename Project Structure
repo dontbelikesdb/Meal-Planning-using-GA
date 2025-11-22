@@ -1,0 +1,111 @@
+meal-planner-app/
+│
+├── frontend/                 # React web application (Person A)
+│   ├── public/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── store/
+│   │   ├── utils/
+│   │   └── index.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/                  # FastAPI backend (Person B)
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── v1/
+│   │   │   │   ├── endpoints/
+│   │   │   │   │   ├── auth.py
+│   │   │   │   │   ├── profile.py
+│   │   │   │   │   ├── recipes.py
+│   │   │   │   │   ├── plan.py
+│   │   │   │   │   └── feedback.py
+│   │   │   └── deps/
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   ├── security.py
+│   │   │   └── logging.py
+│   │   ├── db/
+│   │   │   ├── base.py
+│   │   │   ├── session.py
+│   │   │   ├── init_db.py
+│   │   │   └── migrations/
+│   │   ├── models/
+│   │   │   ├── user.py
+│   │   │   ├── recipe.py
+│   │   │   ├── plan.py
+│   │   │   └── constraints.py
+│   │   ├── schemas/
+│   │   │   ├── user.py
+│   │   │   ├── recipe.py
+│   │   │   ├── plan.py
+│   │   │   └── constraints.py
+│   │   ├── services/
+│   │   │   ├── nutrition/
+│   │   │   │   ├── fsa_score.py
+│   │   │   │   ├── who_score.py
+│   │   │   │   └── nutrition_utils.py
+│   │   │   ├── plan_generator/
+│   │   │   │   ├── request_queue.py
+│   │   │   │   └── publish_task.py
+│   │   ├── main.py
+│   │   └── utils/
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── alembic.ini
+│
+├── ga-engine/                # Genetic Algorithm engine worker
+│   ├── engine/
+│   │   ├── core/
+│   │   │   ├── chromosome.py
+│   │   │   ├── fitness.py
+│   │   │   ├── mutation.py
+│   │   │   ├── crossover.py
+│   │   │   └── selection.py
+│   │   ├── loader/
+│   │   │   ├── recipe_loader.py
+│   │   │   ├── nutrient_loader.py
+│   │   │   └── constraint_loader.py
+│   │   ├── executor/
+│   │   │   ├── run_ga.py
+│   │   │   └── evaluate_plan.py
+│   │   └── utils/
+│   │       └── helpers.py
+│   ├── worker.py             # Celery / RQ worker
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── data/                     # Dataset & ingestion
+│   ├── raw/
+│   │   └── mealrec_dataset/           # From file you uploaded
+│   ├── processed/
+│   ├── ingestion_scripts/
+│   │   ├── load_recipes.py
+│   │   ├── compute_fsa_who.py
+│   │   ├── preprocess_courses.py
+│   │   └── seed_db.py
+│
+├── docs/                     # Documentation (Week 1 deliverables)
+│   ├── architecture.md
+│   ├── er_diagram.png
+│   ├── api_design.md
+│   ├── ga_design.md
+│   ├── nutrition_scoring.md
+│   └── constraints.md
+│
+├── scripts/                  # Devops & utilities
+│   ├── start_dev.sh
+│   ├── start_prod.sh
+│   ├── deploy_backend.sh
+│   ├── format.sh
+│   └── backup_db.sh
+│
+├── docker-compose.yml        # Full local environment
+├── .env.example
+└── README.md
