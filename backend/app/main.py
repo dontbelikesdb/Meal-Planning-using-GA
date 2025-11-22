@@ -1,11 +1,11 @@
 from fastapi import FastAPI
-from .routers import auth_router, healthcheck
+from app.api.v1 import profile, plan
 
-app = FastAPI(title="Diet Recommendation Backend", version="1.0")
+app = FastAPI(title="Meal Planner Backend")
 
-app.include_router(auth_router.router, prefix="/auth", tags=["Auth"])
-app.include_router(healthcheck.router, prefix="/health", tags=["Health"])
+app.include_router(profile.router, prefix="/api/v1")
+app.include_router(plan.router, prefix="/api/v1")
 
 @app.get("/")
-def home():
-    return {"message": "Backend running successfully!"}
+def root():
+    return {"message": "Backend running"}
