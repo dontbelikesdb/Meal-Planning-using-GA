@@ -1,111 +1,167 @@
-meal-planner-app/
+project-root/
 │
-├── frontend/                 # React web application (Person A)
+├── backend/                           # FastAPI backend (APIs only)
+│   ├── app/
+│   │   ├── main.py                     # FastAPI entrypoint
+│   │   ├── config.py                   # Environment variables
+│   │   ├── database.py                 # PostgreSQL connection
+│   │   │
+│   │   ├── models/                     # SQLAlchemy models
+│   │   │   ├── user_model.py
+│   │   │   ├── patient_model.py
+│   │   │   ├── recipe_model.py
+│   │   │   └── diet_model.py
+│   │   │
+│   │   ├── schemas/                    # Pydantic schemas
+│   │   │   ├── user_schema.py
+│   │   │   ├── patient_schema.py
+│   │   │   ├── recipe_schema.py
+│   │   │   └── diet_schema.py
+│   │   │
+│   │   ├── routers/                    # API routes
+│   │   │   ├── auth_router.py
+│   │   │   ├── patient_router.py
+│   │   │   ├── recipe_router.py
+│   │   │   ├── recommendation_router.py
+│   │   │   └── healthcheck.py
+│   │   │
+│   │   ├── services/                   # Business logic
+│   │   │   ├── user_service.py
+│   │   │   ├── recipe_service.py
+│   │   │   ├── diet_service.py
+│   │   │   └── recommendation_service.py
+│   │   │
+│   │   ├── integrations/               # Call ML & GA modules
+│   │   │   ├── ml_client.py
+│   │   │   └── ga_client.py
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── validators.py
+│   │   │   ├── hashing.py
+│   │   │   └── helpers.py
+│   │   │
+│   │   ├── logs/
+│   │   │   └── app.log
+│   │   │
+│   │   └── tests/
+│   │       ├── test_auth.py
+│   │       ├── test_recipe.py
+│   │       └── test_recommendation.py
+│   │
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── README.md
+│
+│
+├── ml_engine/                          # ML Model: Training + Inference
+│   ├── train/
+│   │   ├── feature_engineering.py
+│   │   ├── train_model.py
+│   │   ├── evaluate_model.py
+│   │   ├── split_data.py
+│   │   └── dataset/                    # Raw ML datasets
+│   │       └── personalized_diet.csv
+│   │
+│   ├── inference/
+│   │   ├── load_model.py
+│   │   ├── predict.py
+│   │   └── model.pkl
+│   │
+│   ├── api_server/                     # ML microservice (FastAPI)
+│   │   ├── main.py
+│   │   ├── predictor_service.py
+│   │   └── requirements.txt
+│   │
+│   ├── Dockerfile
+│   └── README.md
+│
+│
+├── ga_engine/                          # Genetic Algorithm Optimizer
+│   ├── core/
+│   │   ├── ga_core.py
+│   │   ├── selection.py
+│   │   ├── crossover.py
+│   │   ├── mutation.py
+│   │   └── fitness.py
+│   │
+│   ├── api_server/                     # GA service (FastAPI)
+│   │   ├── main.py
+│   │   ├── optimizer_service.py
+│   │   └── requirements.txt
+│   │
+│   ├── Dockerfile
+│   └── README.md
+│
+│
+├── data_pipelines/                     # Data ingestion, cleaning & ETL
+│   ├── ingest_recipes.py
+│   ├── ingest_personalized_diet.py
+│   ├── preprocess.py
+│   ├── merge_datasets.py
+│   ├── validate_data.py
+│   └── README.md
+│
+│
+├── database/
+│   ├── schema.sql                      # All tables
+│   ├── seed_data.sql
+│   ├── migrations/                     # Alembic
+│   │   ├── env.py
+│   │   └── versions/
+│   └── README.md
+│
+│
+├── frontend/                           # React (Vite)
 │   ├── public/
 │   ├── src/
-│   │   ├── api/
-│   │   ├── assets/
+│   │   ├── api/                        # Connect to backend
+│   │   │   ├── axiosClient.js
+│   │   │   ├── authApi.js
+│   │   │   ├── recipeApi.js
+│   │   │   └── recommendationApi.js
+│   │   │
 │   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── layouts/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── RecipeCard.jsx
+│   │   │   └── RecommendationCard.jsx
+│   │   │
 │   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── store/
-│   │   ├── utils/
-│   │   └── index.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── DietPlanner.jsx
+│   │   │   ├── Recipes.jsx
+│   │   │   └── Recommendations.jsx
+│   │   │
+│   │   ├── context/
+│   │   │   └── UserContext.jsx
+│   │   │
+│   │   ├── styles/
+│   │   │   └── globals.css
+│   │   │
+│   │   └── main.jsx
+│   │
 │   ├── package.json
-│   └── vite.config.js
+│   ├── vite.config.js
+│   └── README.md
 │
-├── backend/                  # FastAPI backend (Person B)
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── v1/
-│   │   │   │   ├── endpoints/
-│   │   │   │   │   ├── auth.py
-│   │   │   │   │   ├── profile.py
-│   │   │   │   │   ├── recipes.py
-│   │   │   │   │   ├── plan.py
-│   │   │   │   │   └── feedback.py
-│   │   │   └── deps/
-│   │   ├── core/
-│   │   │   ├── config.py
-│   │   │   ├── security.py
-│   │   │   └── logging.py
-│   │   ├── db/
-│   │   │   ├── base.py
-│   │   │   ├── session.py
-│   │   │   ├── init_db.py
-│   │   │   └── migrations/
-│   │   ├── models/
-│   │   │   ├── user.py
-│   │   │   ├── recipe.py
-│   │   │   ├── plan.py
-│   │   │   └── constraints.py
-│   │   ├── schemas/
-│   │   │   ├── user.py
-│   │   │   ├── recipe.py
-│   │   │   ├── plan.py
-│   │   │   └── constraints.py
-│   │   ├── services/
-│   │   │   ├── nutrition/
-│   │   │   │   ├── fsa_score.py
-│   │   │   │   ├── who_score.py
-│   │   │   │   └── nutrition_utils.py
-│   │   │   ├── plan_generator/
-│   │   │   │   ├── request_queue.py
-│   │   │   │   └── publish_task.py
-│   │   ├── main.py
-│   │   └── utils/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── alembic.ini
 │
-├── ga-engine/                # Genetic Algorithm engine worker
-│   ├── engine/
-│   │   ├── core/
-│   │   │   ├── chromosome.py
-│   │   │   ├── fitness.py
-│   │   │   ├── mutation.py
-│   │   │   ├── crossover.py
-│   │   │   └── selection.py
-│   │   ├── loader/
-│   │   │   ├── recipe_loader.py
-│   │   │   ├── nutrient_loader.py
-│   │   │   └── constraint_loader.py
-│   │   ├── executor/
-│   │   │   ├── run_ga.py
-│   │   │   └── evaluate_plan.py
-│   │   └── utils/
-│   │       └── helpers.py
-│   ├── worker.py             # Celery / RQ worker
-│   ├── requirements.txt
-│   └── Dockerfile
+├── scripts/                            # Automation & helper scripts
+│   ├── start_backend.sh
+│   ├── start_frontend.sh
+│   ├── start_ml_service.sh
+│   ├── start_ga_service.sh
+│   ├── db_migrate.sh
+│   └── deploy_all.sh
 │
-├── data/                     # Dataset & ingestion
-│   ├── raw/
-│   │   └── mealrec_dataset/           # From file you uploaded
-│   ├── processed/
-│   ├── ingestion_scripts/
-│   │   ├── load_recipes.py
-│   │   ├── compute_fsa_who.py
-│   │   ├── preprocess_courses.py
-│   │   └── seed_db.py
 │
-├── docs/                     # Documentation (Week 1 deliverables)
-│   ├── architecture.md
-│   ├── er_diagram.png
-│   ├── api_design.md
-│   ├── ga_design.md
-│   ├── nutrition_scoring.md
-│   └── constraints.md
+├── docker/                             # Docker configs for each service
+│   ├── backend.Dockerfile
+│   ├── ml.Dockerfile
+│   ├── ga.Dockerfile
+│   └── frontend.Dockerfile
 │
-├── scripts/                  # Devops & utilities
-│   ├── start_dev.sh
-│   ├── start_prod.sh
-│   ├── deploy_backend.sh
-│   ├── format.sh
-│   └── backup_db.sh
+├── docker-compose.yml                  # Runs all services together
 │
-├── docker-compose.yml        # Full local environment
-├── .env.example
-└── README.md
+└── README.md                           # Main documentation
