@@ -1,0 +1,262 @@
+ChatGPT said:
+
+Below is a complete, professional GitHub Collaboration Guide that you can place inside your repository as:
+
+📄 docs/CONTRIBUTING.md
+(or simply CONTRIBUTING.md in the root)
+
+It covers everything you asked for.
+
+🤝 GitHub Collaboration Guide
+
+A Complete Workflow for Team Contributions
+
+Welcome to the project!
+This guide explains how to work collaboratively using Git, GitHub, and standard development workflows.
+
+📌 1. Initial Setup
+
+Before collaborating:
+
+✅ Install Tools
+
+Git → https://git-scm.com/downloads
+
+VS Code / IntelliJ / PyCharm
+
+Node.js (for frontend)
+
+Python + virtualenv (for backend + GA)
+
+Docker (optional but recommended)
+
+✅ Configure Git (once)
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+
+📌 2. Forking the Repository
+
+If you are external to the main repo, you must fork.
+
+Go to the GitHub repository
+
+Click Fork (top right)
+
+GitHub creates a copy under your username
+
+You will push changes to your fork → then open Pull Requests
+
+📌 3. Cloning and Setup
+Clone the Main or Forked Repo
+git clone https://github.com/<your-username>/Meal-Planning-using-GA.git
+cd Meal-Planning-using-GA
+
+Add the Original Repository as Upstream (important)
+git remote add upstream https://github.com/dontbelikesdb/Meal-Planning-using-GA.git
+
+Check remotes
+git remote -v
+
+
+Should show:
+
+origin    <your fork>
+upstream  <main/original>
+
+📌 4. Branch Management
+Branch Naming Convention
+
+Use clear prefixes:
+
+Purpose	Prefix	Example
+Feature	feat/	feat/add-login-page
+Fix	fix/	fix/recipe-api-bug
+Docs	docs/	docs/update-readme
+Refactor	refactor/	refactor/ga-module
+Create a Branch
+git checkout -b feat/new-feature
+
+Switch Branch
+git checkout main
+
+Delete a Branch
+git branch -d feat/new-feature
+
+📌 5. Daily Workflow (Important!)
+
+Every day before you start working:
+
+1. Switch to main
+git checkout main
+
+2. Pull latest changes from main repo
+git pull upstream main
+
+3. Update your fork
+git push origin main
+
+4. Create a new branch for the day’s work
+git checkout -b feat/todays-task
+
+
+Then continue coding.
+
+📌 6. Pull Request Process
+Step-by-step
+
+Commit your code on your feature branch
+
+Push to your fork:
+
+git push origin feat/todays-task
+
+
+Go to GitHub → your fork
+
+Click Compare & Pull Request
+
+Fill PR template:
+
+Summary of changes
+
+Screenshot (if UI)
+
+Linked issue number
+
+Steps to test
+
+Submit PR
+
+Wait for code review
+
+Apply requested changes
+
+Reviewer approves → Merge
+
+📌 7. Code Review Guidelines
+As a Reviewer:
+
+✔ Check code readability
+✔ Check if feature follows architecture
+✔ Confirm there are no security issues
+✔ Look for duplication
+✔ Run code locally if needed
+✔ Suggest improvements, not insults
+✔ Approve only when:
+
+tests pass
+
+CI passes
+
+code quality is good
+
+As an Author:
+
+✔ Be open to feedback
+✔ Commit updates requested in review
+✔ Never argue—explain calmly if needed
+
+📌 8. Conflict Resolution
+When Git Shows a Merge Conflict:
+
+Open the conflicted file
+
+Find markers:
+
+<<<<<<< HEAD
+Your changes
+=======
+Incoming changes
+>>>>>>> branch-name
+
+
+Manually edit & keep correct version
+
+Remove markers
+
+Add resolved file:
+
+git add filename
+
+
+Continue merge:
+
+git commit
+
+Avoid conflicts by:
+
+pulling latest code daily
+
+not committing large chunks at once
+
+using meaningful branches
+
+📌 9. Essential Git Commands
+Check status
+git status
+
+Stage changes
+git add .
+
+Commit
+git commit -m "Meaningful commit message"
+
+Push branch
+git push origin branch-name
+
+Fetch updates (no merge)
+git fetch upstream
+
+Merge updates
+git merge upstream/main
+
+Stash changes temporarily
+git stash
+
+Apply stashed changes
+git stash pop
+
+📌 10. Best Practices
+✔ Commit small, frequent updates
+✔ Use meaningful commit messages
+✔ One PR = One Feature
+✔ Never push directly to main
+✔ Always create a feature branch
+✔ Keep your fork updated every day
+✔ Write clear documentation
+✔ Use .env.example to show required variables
+📌 11. Troubleshooting
+❗“Permission denied” when pushing
+
+You are pushing to the original repo.
+Fix:
+
+git push origin branch-name
+
+❗"Your branch is behind 'upstream/main'"
+
+Fix:
+
+git pull upstream main
+
+❗Merge conflicts in PR
+
+Follow Conflict Resolution section above.
+
+❗PR not showing latest changes
+
+You forgot to push:
+
+git push origin branch-name
+
+❗Frontend/Backend not starting
+
+Check:
+
+Node version
+
+Python env
+
+Missing .env variables
+
+Docker not installed
