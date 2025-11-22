@@ -1,7 +1,9 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import ProfileForm from "./pages/ProfileForm";
+import GeneratePlan from "./pages/GeneratePlan";
 
 export default function App() {
   return (
@@ -9,7 +11,8 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<ProfileForm />} />
+        <Route path="/generate" element={<GeneratePlan />} />
       </Routes>
     </BrowserRouter>
   );
