@@ -1,3 +1,8 @@
 export default function Home() {
-  return <h1>Frontend is working!</h1>;
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Meal Planner using GA</h1>
+      <p>Welcome to the AI-powered Meal Planner.</p>
+    </div>
+  );
 }
