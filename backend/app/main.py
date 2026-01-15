@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from .core.config import settings
 from .db.session import engine, SessionLocal
 from .models.base import Base
-from .api.api_v1.api import api_router
+from .api.v1.api import api_router
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
